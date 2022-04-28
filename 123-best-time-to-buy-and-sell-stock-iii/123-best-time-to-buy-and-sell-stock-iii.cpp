@@ -14,10 +14,6 @@ public:
         }
         int max_price = prices[n - 1];
         max_profit = 0;
-        for(int i: profit){
-            cout << i << " ";
-        }
-        cout << endl;
         for(int i = n - 2; i >= 0; i--){
             if(max_price < prices[i]){
                 max_price = prices[i];
@@ -25,11 +21,6 @@ public:
             max_profit = max(max_profit, max_price - prices[i]);
             profit[i] += max_profit;
         }
-        
-        for(int i: profit){
-            cout << i << " ";
-        }
-        cout << endl;
         return *max_element(profit.begin(), profit.end());
     }
 };
