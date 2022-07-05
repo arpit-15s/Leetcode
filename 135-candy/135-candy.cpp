@@ -14,9 +14,6 @@ public:
             }
             res += dp[i];
         }
-        for(int i: dp)
-            cout << i << " ";
-        cout << endl;
         return res + dp[n - 1];
     }
 };
