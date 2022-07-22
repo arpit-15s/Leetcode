@@ -24,9 +24,9 @@ public:
                 gCurr = gCurr -> next; 
             }
             curr = curr -> next;
-            lCurr -> next = NULL;
-            gCurr -> next = NULL;
         }
+        // lCurr -> next = NULL;
+        gCurr -> next = NULL;
         lCurr -> next = greater -> next;
         return less -> next;
     }
