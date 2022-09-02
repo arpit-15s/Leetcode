@@ -11,43 +11,23 @@
  */
 class Solution {
 public:
-    vector<double> levelTraversal(TreeNode* root){
-        vector<double> res;
+    vector<double> averageOfLevels(TreeNode* root) {
         queue<TreeNode*> q;
-        queue<int> q2;
-        res.push_back(root -> val * 1.0);
         q.push(root);
-        int i = 1;
+        vector<double> res;
         while(!q.empty()){
-            while(i != 0 && !q.empty()){
-                TreeNode* node = q.front();
-                // cout << node -> val << endl;
-                q.pop();
-                if(node -> left != NULL){
-                    q.push(node -> left);
-                    q2.push(node -> left -> val);
-                }
-                    
-                if(node -> right != NULL){
-                    q.push(node -> right);
-                    q2.push(node -> right -> val);
-                }
-                    
-                i--;
+            queue<TreeNode*> temp;
+            double avg = 0, count = 0;
+            while(!q.empty()){
+                TreeNode* node = q.front(); q.pop();
+                if(node -> left != NULL) temp.push(node -> left);
+                if(node -> right != NULL) temp.push(node -> right);
+                avg += node -> val;
+                count++;
             }
-            long long temp = 0, size = q2.size();
-            while(!q2.empty()){
-                temp += q2.front();
-                q2.pop();
-            }
-            if(size != 0)
-            res.push_back((temp * 1.0)/size);
-            i = size;
+            res.push_back(avg / count);
+            q = temp;
         }
         return res;
-    }
-    vector<double> averageOfLevels(TreeNode* root) {
-        if(root == NULL) return {};
-        return levelTraversal(root);
     }
 };
