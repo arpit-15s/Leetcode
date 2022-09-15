@@ -1,17 +1,15 @@
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
-        if(numRows == 1) return {{1}};
-        vector<vector<int>> res(numRows);
-        res[0] = {1};
-        res[1] = {1, 1};
-        for(int i = 2; i < numRows; i++){
-            res[i].push_back(1);
-            for(int j = 1; j < res[i - 1].size(); j++){
-                res[i].push_back(res[i - 1][j] + res[i - 1][j - 1]);
+        vector<vector<int>> pas_tri(numRows);
+        pas_tri[0].push_back(1);
+        for(int i = 1; i < numRows; i++){
+            pas_tri[i].push_back(1);
+            for(int j = 1; j < pas_tri[i - 1].size(); j++){
+                pas_tri[i].push_back(pas_tri[i - 1][j - 1] + pas_tri[i - 1][j]);
             }
-            res[i].push_back(1);
+            pas_tri[i].push_back(1);
         }
-        return res;
+        return pas_tri;
     }
 };
