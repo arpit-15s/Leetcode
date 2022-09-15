@@ -2,20 +2,33 @@ class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
         int n = nums.size();
-        
-        for(int i = n - 1; i > 0; i--){
+        int i = n - 1;
+        int breakpoint = -1;
+        while(i != 0){
             if(nums[i] > nums[i - 1]){
-                int min = i;
-                for(int j = n - 1; j >= i; j--){
-                    if(nums[min] > nums[j] && nums[j] > nums[i - 1])
-                        min = j;
-                }
-                swap(nums[min], nums[i - 1]);
-                sort(nums.begin() + i, nums.end());
-                return;
+                breakpoint = i - 1;
+                break;
             }
+            i--;
         }
-        reverse(nums.begin(), nums.end());
+        if(breakpoint == - 1){
+            reverse(nums.begin(), nums.end());
+            return;
+        }
+        int min_val = i;
+        i = n - 1;
+        while(i != breakpoint){
+            if(nums[i] > nums[breakpoint] && nums[i] <= nums[min_val]){
+                min_val = i;
+                break;
+            }
+            i--;
+        }
+        swap(nums[breakpoint], nums[min_val]);
+        reverse(nums.begin() + breakpoint + 1, nums.end());
         return;
     }
 };
+// 1 -> 4 -> 6 -> 3 -> 2 -> 1
+// 1 -> 6 -> 4 -> 3 -> 2 -> 1
+// 2 -> 1 -> 1 -> 3 -> 4 -> 6
